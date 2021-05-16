@@ -14,6 +14,7 @@ const BubblePage = () => {
   );
 };
 
+let x = 3;
 export default BubblePage;
 
 //Task List:
