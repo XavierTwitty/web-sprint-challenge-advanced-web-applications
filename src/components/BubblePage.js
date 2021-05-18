@@ -2,9 +2,18 @@ import React, { useEffect, useState } from "react";
 
 import Bubbles from "./Bubbles";
 import ColorList from "./ColorList";
+import { getColors } from "../helpers/getColors";
 
 const BubblePage = () => {
   const [colorList, setColorList] = useState([]);
+  useEffect(() => {
+    getColors()
+      .then((res) => {
+        console.log("Colors", res);
+        setColorList(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
     <div className="container">

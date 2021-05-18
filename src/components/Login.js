@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { axiosWithAuth } from "../helpers/axiosWithAuth";
+import { useHistory } from "react-router-dom";
 
 const Login = () => {
   // make a post request to retrieve a token from the api
@@ -7,6 +8,7 @@ const Login = () => {
 
   const [form, setFrom] = useState({ username: "", password: "" });
   const [error, setError] = useState("");
+  const { push } = useHistory();
 
   useEffect(() => {
     // make a post request to retrieve a token from the api
@@ -29,8 +31,10 @@ const Login = () => {
       .post("/login", form)
       .then((res) => {
         console.log(res);
+        localStorage.setItem("token", res.data.payload);
+        push("/colors");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => setError(err.response.data.error));
   };
 
   return (
