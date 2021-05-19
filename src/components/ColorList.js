@@ -24,14 +24,37 @@ const ColorList = ({ colors, updateColors }) => {
     axiosWithAuth()
       .put(`/colors/${colorToEdit.id}`, colorToEdit)
       .then((res) => {
-        console.log("edit", res);
-        setColorToEdit(res.data);
+        updateColors(
+          colors.map((color) => {
+            if (color.id === Number(res.data.id)) {
+              return res.data;
+            } else {
+              return color;
+            }
+          })
+        );
       })
       .catch((err) => console.log(err));
   };
 
-  const deleteColor = (color) => {};
-
+  const deleteColor = (color) => {
+    console.log(color);
+    axiosWithAuth()
+      .delete(`/colors/${colorToEdit.id}`)
+      .then((res) => {
+        console.log("delete", res);
+        updateColors(
+          colors.map((color) => {
+            if (color.id === Number(res.data.id)) {
+              return res.data;
+            } else {
+              return color;
+            }
+          })
+        );
+      })
+      .catch((err) => console.log(err));
+  };
   return (
     <div className="colors-wrap">
       <p>colors</p>

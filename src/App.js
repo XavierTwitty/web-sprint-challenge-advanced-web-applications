@@ -7,24 +7,23 @@ import PrivateRoute from "./helpers/PrivateRoute";
 import BubblePage from "./components/BubblePage";
 
 function App() {
-  const history = useHistory();
   return (
     <Router>
       <div className="App">
         <header>
           Color Picker Sprint Challenge
-          <button
-            OnClick={() => {
+          <a
+            data-testid="logoutButton"
+            href="/login"
+            onClick={() => {
               localStorage.removeItem("token");
-              history.push("/login");
             }}
           >
-            {" "}
-            logout{" "}
-          </button>
+            logout
+          </a>
         </header>
         <PrivateRoute path="/colors" component={BubblePage} />
-        <Route exact path="/" component={Login} />
+        <Route exact path="/login" component={Login} />
       </div>
     </Router>
   );
