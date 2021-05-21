@@ -14,7 +14,7 @@ function App() {
           Color Picker Sprint Challenge
           <a
             data-testid="logoutButton"
-            href="/login"
+            href="/"
             onClick={() => {
               localStorage.removeItem("token");
             }}
@@ -23,7 +23,7 @@ function App() {
           </a>
         </header>
         <PrivateRoute path="/colors" component={BubblePage} />
-        <Route exact path="/login" component={Login} />
+        <Route exact path="/" component={Login} />
       </div>
     </Router>
   );

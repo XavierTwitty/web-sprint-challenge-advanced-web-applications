@@ -38,17 +38,14 @@ const ColorList = ({ colors, updateColors }) => {
   };
 
   const deleteColor = (color) => {
-    console.log(color);
     axiosWithAuth()
       .delete(`/colors/${colorToEdit.id}`)
       .then((res) => {
         console.log("delete", res);
         updateColors(
-          colors.map((color) => {
-            if (color.id === Number(res.data.id)) {
+          colors.filter((color) => {
+            if (color.id !== Number(res.data)) {
               return res.data;
-            } else {
-              return color;
             }
           })
         );
